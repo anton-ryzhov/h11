@@ -425,6 +425,7 @@ def test_max_incomplete_event_size_countermeasure() -> None:
     c = Connection(SERVER, max_incomplete_event_size=1000)
     c.receive_data(b"GET / HTTP/1.0\r\nBig: ")
     c.receive_data(b"a" * 4000)
+    assert get_all_events(c) == []
     c.receive_data(b"\r\n\r\n")
     assert get_all_events(c) == [
         Request(
