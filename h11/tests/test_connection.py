@@ -422,7 +422,7 @@ def test_max_incomplete_event_size_countermeasure() -> None:
 
     # Checking that the same header is accepted / rejected depending on the
     # max_incomplete_event_size setting:
-    c = Connection(SERVER, max_incomplete_event_size=5000)
+    c = Connection(SERVER, max_incomplete_event_size=1000)
     c.receive_data(b"GET / HTTP/1.0\r\nBig: ")
     c.receive_data(b"a" * 4000)
     c.receive_data(b"\r\n\r\n")
